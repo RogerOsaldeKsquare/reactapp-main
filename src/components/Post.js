@@ -1,37 +1,46 @@
-import React from 'react';
-import {Card, Grid } from 'semantic-ui-react';
+import { useState, useEffect } from 'react';
+import {Card} from 'semantic-ui-react';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 
+  
+const PostView = () => {
+    const [post, setPost] = useState({0:''});
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    let { id } = useParams();
+    const [status, setStatus] = useState('');
 
-export default function Post({data}){
+    useEffect(() => {
+        async function fetchPost () {
+          let res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+          let data = await res.json();
+          setPost(data);
+          setStatus(res.status);
+          setLoading(false);
+        }
+        setLoading(true);
+        fetchPost();
+      }, [id])
+
     return (
         <>
-        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '10vh'}}>
-            <h1> Post </h1>
-         </div>
-        <Grid columns={3}>
-            {data.map((post, i)=>{
-                return(
-                    <Grid.Column key={i}>
-                    <Card>
-                        <Card.Content>
-                            <Card.Header>User ID: {post.userId}</Card.Header>
-                            <Card.Description>
-                                <strong>Post ID</strong>
-                                <p>{post.id}</p>
-                                <strong>Title</strong>
-                                <p>{post.title}</p>
-                                <strong>Status</strong>
-                                <p>{post.completed}</p>
-
-                                <button>More Info</button>
-                            </Card.Description>
-                        </Card.Content>
-                    </Card>
-                    </Grid.Column>
-                )
-            })}
-        </Grid>
-    </>
-    )
-
-}
+            <Card>
+            <Card.Content>
+                <Card.Header>{post.title}</Card.Header>
+                <Card.Description>
+                    <strong>User ID</strong>
+                    <p>{post.userId}</p>
+                    <strong>Post ID</strong>
+                    <p>{post.id}</p>
+                    <strong>Body</strong>
+                    <p>{post.body}</p>
+                </Card.Description>
+            </Card.Content>
+            </Card>
+        <button onClick={()=> navigate('/posts')}>Return</button>
+        </>
+    );
+};
+  
+  export default PostView;
+  

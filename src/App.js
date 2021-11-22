@@ -15,7 +15,7 @@ function App() {
 
   useEffect(()=>{
     async function fetchPost(){
-      let res = await fetch('https://jsonplaceholder.typicode.com/todos');
+      let res = await fetch('https://jsonplaceholder.typicode.com/posts');
       let data = await res.json();
       setPost(data);
       setLoading(false);
@@ -38,7 +38,8 @@ function App() {
               <Routes>
               <Route element={<Home />} exact path='/'></Route>
               <Route element={<Login/>} exact path='/login'></Route>
-              <Route element={<Pagination/>} exact path='/pagination'></Route>
+              <Route element={<Pagination/>} exact path='/posts'></Route>
+              <Route element={<Post/>} exact path='/posts/:id'></Route>
               <Route element={<ErrorPage />} exact path='*'></Route>
               </Routes>
             ) }

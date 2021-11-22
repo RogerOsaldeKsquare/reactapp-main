@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../style.css";
 import {Card, Grid } from 'semantic-ui-react';
+import {Link} from 'react-router-dom'
 
 
 //Este segmento puede ser comentado ya tenemos la lista de cartas para los post
@@ -111,7 +112,11 @@ function PaginationComponent() {
                                 <strong>Title</strong>
                                 <p>{post.title}</p>
                             </Card.Description>
+                            <Link to={`/posts/${post.id}`}>
+                            <button>More Info</button>
+                            </Link>
                         </Card.Content>
+                        
                     </Card>
                     </Grid.Column>
                 )

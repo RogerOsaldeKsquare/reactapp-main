@@ -6,25 +6,7 @@ import { Switch } from '@mui/material';
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 export default function NavBar() {
-    // const navigate = useNavigate();
-    // const location = useLocation();
-    // const [log, setLog] = useState('Login');
     const [theme, setTheme] = useState(true);
-    // const { id } = useParams();
-  
-    // useEffect(() => {
-    //   if(localStorage.getItem('authorized') === '1'){
-    //     setLog('Logout');
-    //   }
-    // }, [])
-  
-    // const handleLogin = (event) => {
-    //     if (localStorage.getItem('authorized') === '1'){
-    //       localStorage.setItem('authorized', '0');
-    //       navigate('/login');
-    //     }
-    //     navigate('/login')
-    // }
     return (
         <div>
 

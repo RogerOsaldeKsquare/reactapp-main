@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import login from '../assets/loginI'
+import '../App.css';
 
 
 function Login() {
@@ -13,27 +15,24 @@ const navigate = useNavigate();
   const handleLoginEmail = (event) => {
     event.preventDefault();
 
-    if (email !== 'example@example.com' || password !== 'password') {
+    if (email !== 'example@example.com' || password !== 'admin') {
         localStorage.setItem('authorized', '0');
         setShowError(true) 
         return
     };
     localStorage.setItem('authorized', '1');
-    navigate('/pagination');
+    navigate('/posts');
   };
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
 
   const isValidLogin = () => {
     return email?.length && password?.length;
   };
     return (
+        <>
+        <div className="image-container">
+        <img  style={{ width: 700, height: 650 }} src={login[0]}  alt={login}/>
+        </div> 
     <div>
             <form onSubmit={handleLoginEmail}>
       <div>
@@ -44,7 +43,7 @@ const navigate = useNavigate();
           name="email"
           required
           value={email}
-          onChange={handleEmailChange}
+          onChange={(e)=>setEmail(e.target.value)}
           fullWidth
         ></TextField>
         <div></div>
@@ -55,7 +54,7 @@ const navigate = useNavigate();
           name="password"
           required
           value={password}
-          onChange={handlePasswordChange}
+          onChange={(e)=>setPassword(e.target.value)}
           fullWidth
         ></TextField>
       </div>
@@ -69,6 +68,7 @@ const navigate = useNavigate();
       </div>
     </form>
         </div>
+        </>
     )
 }
 
